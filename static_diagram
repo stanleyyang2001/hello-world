@@ -1,1 +1,23 @@
-s
+var x = 50;
+var y = 50;
+var radius = 100;
+
+
+function setup() {
+  createCanvas(400, 400);
+  background(220);
+  fill("red");
+  circle(x,y,radius)
+}
+
+function draw() {
+  background(220);
+  var d = dist(mouseX, mouseY, x, y);
+  if (mouseIsPressed && d < radius ){
+    circle(mouseX, mouseY, radius);
+    x = mouseX;
+    y = mouseY;
+  }else {
+    circle(x,y,radius);
+  }
+}
