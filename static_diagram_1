@@ -1,0 +1,76 @@
+// reference site: https://angrybirds.fandom.com/wiki/Slingshot
+
+var birdX = 130;
+var birdY = 90;
+var bodyRadius = 60
+
+function setup() {
+  createCanvas(1200, 400);
+}
+
+function draw() {
+  background(180,205,255);
+  
+  // land
+  fill(132,175,64);
+  strokeWeight(0);
+  var ground = rect(-10,220,1300,280);
+  
+
+  
+  // slingshot
+  strokeWeight(20);
+  stroke(157,92,25);
+  var stick1 = line(175, 100, 150, 180);
+  stroke(176,121,56);
+  
+  // sling 1
+  strokeWeight(15);
+  stroke(77,31,4);
+  var sling1 = line(175,100, birdX-bodyRadius/2, birdY)
+  
+  
+    // bird
+    stroke("black")
+  strokeWeight(5)
+  var tail1 = line(birdX-bodyRadius/2+5, birdY, birdX-bodyRadius/2-10, birdY-10)
+  var tail2 = line(birdX-bodyRadius/2+5, birdY, birdX-bodyRadius/2-10, birdY)
+  var tail3 = line(birdX-bodyRadius/2+5, birdY, birdX-bodyRadius/2-10, birdY+8)
+  strokeWeight(1);
+  fill("red");
+  var feather = circle(birdX,birdY,bodyRadius);
+  fill(239,207,176)
+  var c2 = arc(birdX, birdY, bodyRadius, bodyRadius,radians(30), radians(150) )
+  fill("white");
+  var eye1 = ellipse(birdX+3, birdY, 15,10)
+  var eye2 = ellipse(birdX+18, birdY, 15,10)
+  fill("black")
+  var eyeball = circle(birdX+6, birdY+1, 5)
+  var eyeball2 = circle(birdX+15, birdY+1, 5)
+  strokeWeight(5)
+  var eyebrow1 = line(birdX-4, birdY-7, birdX+10, birdY-2)
+  var eyebrow2 = line(birdX+14, birdY-2, birdX+25, birdY-6)
+  fill("yellow")
+  strokeWeight(1)
+  var mouth = quad(birdX+15, birdY+5, birdX+8, birdY+10, birdX+15, birdY+15, birdX+25, birdY+10);
+  var mouthLip = line(birdX+8, birdY+10, birdX+25, birdY+10);
+  stroke("red");
+  strokeWeight(8);
+  var headFeather1 = line(birdX+16, birdY-15, birdX-8, birdY-40)
+  var headFeather2 = line(birdX+16, birdY-15, birdX-13, birdY-32)
+
+  
+  
+  
+  strokeWeight(20);
+  stroke(177,116,42);
+  var stick2 = line(100,100, 150,180);
+  var stick3 = line(150,180, 150, 250);
+  
+  var d = dist(175, 100, birdX, birdY) + bodyRadius;
+  strokeWeight(15);
+  stroke(71,31,4);
+  var sling2 = line(100,100, birdX-bodyRadius/2, birdY);
+
+
+}
