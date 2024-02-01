@@ -1,0 +1,18 @@
+function setup() {
+  createCanvas(400, 400);
+   for (i = 1; i < 11; i++){
+    //console.log(sin(i*36))
+    //console.log(cos(i*36))
+    strokeWeight(10);
+    stroke("black")
+    point(sin(i*36)*100+200, cos(i*36)*100+200)
+    console.log(i*36)
+
+  }
+ 
+}
+
+function draw() {
+  //background(220);
+  
+}
