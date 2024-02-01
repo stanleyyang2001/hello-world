@@ -1,6 +1,12 @@
-var boardSize = 60;
+// Note: This file contains the checkers and make a star exercise all in the setup() function separated by comments
+var boardSize = 40;
 var boardColor;
+
+var x;
+var y;
+
 function setup() {
+  // Checkers
   createCanvas(800, 800);
   for (i = 0; i < 8; i++){  // row
     for (j = 0; j < 8; j++){ // column
@@ -33,6 +39,37 @@ function setup() {
         }
     }
     }
+  }
+/////////////////////////////
+/////////////////////////////
+  
+  // Make a star
+  angleMode(DEGREES)
+  for (i = 0; i < 11; i++){
+    strokeWeight(10);
+    
+    stroke("black")
+    
+    x = sin(i*36)
+    y = cos(i*36)
+    
+    var nextX = sin((i+1)*36)
+    var nextY = cos((i+1)*36)
+    
+    // plot the vertices
+    point(x*100+600, y*100+200)
+    
+    // generate the star
+    
+    strokeWeight(3)
+    if (i % 2 == 0){
+      line(x*50+600, y*50+200, nextX*100+600, nextY*100+200)
+    } else {
+      line(x*100+600, y*100+200, nextX*50+600, nextY*50+200)
+    }
+    
+    
+    
   }
 }
 
