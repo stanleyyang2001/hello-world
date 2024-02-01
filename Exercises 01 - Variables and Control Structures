@@ -1,0 +1,43 @@
+var boardSize = 60;
+var boardColor;
+function setup() {
+// checker
+  createCanvas(800, 800);
+  for (i = 0; i < 8; i++){  // row
+    for (j = 0; j < 8; j++){ // column
+      
+      if ( (i+j) % 2 == 0){
+        boardColor = 255;
+      } else {
+        boardColor = 0;
+      }
+      fill(boardColor);
+      rect((i+1)*boardSize, (j+1)*boardSize, boardSize,boardSize)
+
+
+    }
+    }
+  
+  
+  for (i = 0; i < 8; i++){  // row
+    for (j = 0; j < 8; j++){ // column
+      
+      if ( (i+j) % 2 == 0){
+        if (j < 2){
+          fill("red")
+          circle(((i+1)*boardSize)+30, ((j+1)*boardSize)+30, boardSize);
+        }
+      } else {
+        if (j > 5){
+          fill("green")
+          circle(30+(i+1)*boardSize, 30+(j+1)*boardSize, boardSize);
+        }
+    }
+    }
+  }
+}
+
+function draw() {
+  // background(220);
+  
+}
