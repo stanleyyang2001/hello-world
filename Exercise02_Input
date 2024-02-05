@@ -1,0 +1,24 @@
+function setup() {
+  createCanvas(800, 400);
+
+}
+
+function draw() {
+  background(220);
+  strokeWeight(3)
+  for (i = 0; i < 10; i++){
+    if (i % 2 == 0){
+    line(400,i*40,400,40*i+40)
+    }
+  }
+  
+  var textX = 350;
+  var textY = 400;
+  textSize(20)
+  if (mouseX < 400){
+    text("The cursor is on the left side.", textX, textY)
+  } else {
+    text("The cursor is on the right side.", textX, textY)
+  }
+  
+}
