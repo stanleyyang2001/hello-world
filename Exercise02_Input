@@ -1,24 +1,51 @@
+
+var c1 = 0;
+var c2 = 0;
 function setup() {
   createCanvas(800, 400);
 
 }
 
 function draw() {
+  // from https://rgbcolorpicker.com/complementary, 
+  // complementary color of a color is the value where 
+  // 255 - r, 255 - b, and 255 - b
+  
+  // Split Complements
+  strokeWeight(0)
   background(220);
-  strokeWeight(3)
+  fill(c1, c2, 128);
+  rect(0,0,400,400);
+  fill(255-c1, 255-c2, 255-128);
+  rect(400,0,400,400);
+  c1 = map(mouseX, 0,800,0,255);
+  c2 = map(mouseY,0,400,0,255);
+  // map(variable, start1, stop1, start2, stop2)
+  // here start and stop 1 refers to the possible value 
+  // the variable could be, and start and stop 2 will map
+  // the value to its range
+  
+  
+  
+  
+  // Left or Right
+    strokeWeight(3)
+  stroke("white")
   for (i = 0; i < 10; i++){
     if (i % 2 == 0){
     line(400,i*40,400,40*i+40)
     }
   }
   
-  var textX = 350;
+  var textX = 300;
   var textY = 400;
+  fill("black")
   textSize(20)
   if (mouseX < 400){
     text("The cursor is on the left side.", textX, textY)
   } else {
     text("The cursor is on the right side.", textX, textY)
   }
+  
   
 }
