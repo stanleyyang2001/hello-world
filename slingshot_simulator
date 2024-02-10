@@ -1,8 +1,9 @@
 // This is a static diagram that aims to demonstrate the motion of object in a trajectory with the use of a slingshot
 // reference: https://angrybirds.fandom.com/wiki/Slingshot
-var birdX = 130;
-var birdY = 90
-var bodyRadius = 60
+var ballX = 130;
+var ballY = 90
+var bodyRadius = 50
+var stretc = false;
 
 function setup() {
   createCanvas(1200, 400);
@@ -27,20 +28,15 @@ function draw() {
   // sling 1
   strokeWeight(15);
   stroke(120);
-  var sling1 = line(175,100, birdX-bodyRadius/2, birdY)
+  var sling1 = line(175,100, ballX-bodyRadius/2, ballY)
   
   
-     // bird
+     // ball
 
   strokeWeight(1);
   fill("black");
-  var feather = circle(birdX,birdY,bodyRadius);
-  fill("white")
-  var c2 = arc(birdX, birdY, bodyRadius, bodyRadius,radians(30), radians(150) )
-  fill("white");
-  var eye1 = ellipse(birdX+3, birdY, 15,10)
-  var eye2 = ellipse(birdX+18, birdY, 15,10)
-  fill("black")
+  var ball = circle(ballX,ballY,bodyRadius);
+
   
   
   // rest of the sling shot
@@ -49,10 +45,25 @@ function draw() {
   var stick2 = line(100,100, 150,180);
   var stick3 = line(150,180, 150, 250);
   
-  var d = dist(175, 100, birdX, birdY) + bodyRadius;
+  var d = dist(175, 100, ballX, ballY) + bodyRadius;
   strokeWeight(15);
   stroke(120);
-  var sling2 = line(100,100, birdX-bodyRadius/2, birdY);
+  var sling2 = line(100,100, ballX-bodyRadius/2, ballY);
+  
+  strokeWeight(2)
+  // interactive component
+  var d = dist(mouseX, mouseY, ballX, ballY);
+  if (mouseIsPressed && d < bodyRadius ){
+    circle(mouseX, mouseY, bodyRadius);
+    ballX = mouseX;
+    ballY = mouseY;
+    stretch = true;
+  }else if (!mouseIsPressed && stretch){
+    
+  }
+  else {
+    circle(ballX,ballY,bodyRadius);
+  }
 
 
 }
