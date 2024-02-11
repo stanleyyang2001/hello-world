@@ -1,9 +1,12 @@
 // This is a static diagram that aims to demonstrate the motion of object in a trajectory with the use of a slingshot
 // reference: https://angrybirds.fandom.com/wiki/Slingshot
-var ballX = 130;
-var ballY = 90
-var bodyRadius = 50
-var stretc = false;
+var ballX = 65;
+var ballY = 300;
+var originX = ballX;
+var originY = ballY;
+
+var bodyRadius = 40
+var stretch = false;
 
 function setup() {
   createCanvas(1200, 400);
@@ -15,20 +18,20 @@ function draw() {
   // land
   fill("black");
   strokeWeight(0);
-  var ground = rect(-10,220,1300,280);
+  var ground = rect(-10,300,1300,200);
   
 
   
   // slingshot
-  strokeWeight(20);
+  strokeWeight(12);
   stroke("white");
-  var stick1 = line(175, 100, 150, 180);
+  var stick1 = line(175*0.5, 300, 150*0.5, 340);
   stroke("white");
   
   // sling 1
-  strokeWeight(15);
+  strokeWeight(8);
   stroke(120);
-  var sling1 = line(175,100, ballX-bodyRadius/2, ballY)
+  var sling1 = line(175*0.5,300, ballX-bodyRadius/2, ballY)
   
   
      // ball
@@ -36,21 +39,8 @@ function draw() {
   strokeWeight(1);
   fill("black");
   var ball = circle(ballX,ballY,bodyRadius);
-
   
-  
-  // rest of the sling shot
-  strokeWeight(20);
-  stroke("white")
-  var stick2 = line(100,100, 150,180);
-  var stick3 = line(150,180, 150, 250);
-  
-  var d = dist(175, 100, ballX, ballY) + bodyRadius;
-  strokeWeight(15);
-  stroke(120);
-  var sling2 = line(100,100, ballX-bodyRadius/2, ballY);
-  
-  strokeWeight(2)
+    strokeWeight(2)
   // interactive component
   var d = dist(mouseX, mouseY, ballX, ballY);
   if (mouseIsPressed && d < bodyRadius ){
@@ -59,11 +49,28 @@ function draw() {
     ballY = mouseY;
     stretch = true;
   }else if (!mouseIsPressed && stretch){
-    
+    ballX += 2;
+    ballY -= 2;
+    circle(ballX,ballY, bodyRadius)
   }
   else {
     circle(ballX,ballY,bodyRadius);
   }
+
+  
+  
+  // rest of the sling shot
+  strokeWeight(12);
+  stroke("white")
+  var stick2 = line(100*0.5,300, 150*0.5,340);
+  var stick3 = line(150*0.5,340, 150*0.5, 380);
+  
+  var d = dist(175*0.5, 300, ballX, ballY) + bodyRadius;
+  strokeWeight(8);
+  stroke(120);
+  var sling2 = line(100*0.5,300, ballX-bodyRadius/2, ballY);
+  
+
 
 
 }
