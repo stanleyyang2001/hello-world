@@ -7,6 +7,14 @@ var originY = ballY;
 
 var bodyRadius = 40
 var stretch = false;
+var motion = false;
+
+var xAcc = -0.01
+var yAcc = 0.05
+var time = 0;
+
+var dx = 2;
+var dy = 2;
 
 function setup() {
   createCanvas(1200, 400);
@@ -31,8 +39,12 @@ function draw() {
   // sling 1
   strokeWeight(8);
   stroke(120);
-  var sling1 = line(175*0.5,300, ballX-bodyRadius/2, ballY)
-  
+  if ((ballX-bodyRadius/2) > 50 && (ballY) > 100){
+    line(175*0.5, 300, 135*0.5, 300)
+  } else {
+    console.log(time)
+    line(175*0.5,300, ballX-bodyRadius/2, ballY)
+    }
   
      // ball
 
@@ -43,16 +55,35 @@ function draw() {
     strokeWeight(2)
   // interactive component
   var d = dist(mouseX, mouseY, ballX, ballY);
-  if (mouseIsPressed && d < bodyRadius ){
-    circle(mouseX, mouseY, bodyRadius);
-    ballX = mouseX;
-    ballY = mouseY;
+  if (mouseIsPressed && d < bodyRadius){
+      if (mouseX < 100 && mouseX > 0)
+        {
+          ballX = mouseX;
+        }
+      if (mouseY < 350 && mouseY > 200){
+        ballY = mouseY;
+      }
+    circle(ballX, ballY, bodyRadius);
     stretch = true;
   }else if (!mouseIsPressed && stretch){
-    ballX += 2;
-    ballY -= 2;
-    circle(ballX,ballY, bodyRadius)
+    stretch = false
+    motion = true;
   }
+    else if (!mouseIsPressed && motion){
+      time +=0.5
+    ballX = ballX+dx+xAcc*(time)
+    ballY = ballY-dy+yAcc*(time)
+    circle(ballX,ballY, bodyRadius)
+      if (ballY > 500){
+        // reset all motion related incrementing variables
+        motion = false;
+        ballX = originX;
+        ballY = originY;
+        time = 0;
+        circle(ballX, ballY, bodyRadius)
+      }
+  }
+
   else {
     circle(ballX,ballY,bodyRadius);
   }
@@ -68,7 +99,11 @@ function draw() {
   var d = dist(175*0.5, 300, ballX, ballY) + bodyRadius;
   strokeWeight(8);
   stroke(120);
-  var sling2 = line(100*0.5,300, ballX-bodyRadius/2, ballY);
+  if ((ballX-bodyRadius/2) > 50 && (ballY) > 100){
+    line(100*0.5, 300, 135*0.5, 300)
+  } else {
+    line(100*0.5,300, ballX-bodyRadius/2, ballY);
+    }
   
 
 
