@@ -1,0 +1,20 @@
+function setup() {
+  createCanvas(400, 400);
+  angleMode(DEGREES)
+}
+
+function draw() {
+  
+  // lines to the cursor
+  background(220);
+  translate(180,180)
+  stroke("black")
+  strokeWeight(5)
+  for (i = 0; i < 10; i++){
+    point(sin(i*36)*100, cos(i*36)*100)
+  }
+  for (i = 0; i < 10; i++){
+    //stroke(random(0,255), random(0,255), random(0,255)) // don't uncomment this if you have seizure
+    line(sin(i*36)*100, cos(i*36)*100, mouseX-180, mouseY-180)
+  }
+}
