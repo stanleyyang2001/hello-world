@@ -9,12 +9,13 @@ var bodyRadius = 40
 var stretch = false;
 var motion = false;
 
-var xAcc = -0.01
-var yAcc = 0.05
-var time = 0;
+var distanceStretchX;
+var distanceStretchY;
 
-var dx = 2;
-var dy = 2;
+var initialSpeed;
+
+var shotted = false;
+var time = 0;
 
 function setup() {
   createCanvas(1200, 400);
@@ -22,6 +23,11 @@ function setup() {
 
 function draw() {
   background(155);
+  fill(255)
+  strokeWeight(0)
+  textSize(20)
+  text("Pressed the ball to stretch, release the mouse to shot",200,100,)
+  text("Pressed the mouse again to stop the ball",200,150,)
   
   // land
   fill("black");
@@ -39,10 +45,10 @@ function draw() {
   // sling 1
   strokeWeight(8);
   stroke(120);
-  if ((ballX-bodyRadius/2) > 50 && (ballY) > 100){
+  if (((ballX-bodyRadius/2) > 50 && (ballY) > 100) || shotted){
     line(175*0.5, 300, 135*0.5, 300)
-  } else {
-    console.log(time)
+    shotted = true;
+  } else if (!shotted) {
     line(175*0.5,300, ballX-bodyRadius/2, ballY)
     }
   
@@ -52,31 +58,42 @@ function draw() {
   fill("black");
   var ball = circle(ballX,ballY,bodyRadius);
   
-    strokeWeight(2)
+  strokeWeight(2)
+  
   // interactive component
+  
   var d = dist(mouseX, mouseY, ballX, ballY);
   if (mouseIsPressed && d < bodyRadius){
-      if (mouseX < 100 && mouseX > 0)
+      // limit of initial stretch
+      if (mouseX < 70 && mouseX > 0)
         {
           ballX = mouseX;
         }
-      if (mouseY < 350 && mouseY > 200){
+      if (mouseY < 370 && mouseY > 200){
         ballY = mouseY;
       }
     circle(ballX, ballY, bodyRadius);
     stretch = true;
-  }else if (!mouseIsPressed && stretch){
+    
+  }else if (!mouseIsPressed && stretch){  // release
+    
     stretch = false
     motion = true;
+    
+    distanceStretchX = (originX-mouseX)*0.03;
+    distanceStretchY = (originY-mouseY)*0.1;
+    
+    initialSpeed = dist(mouseX, mouseY, originX, originY) 
   }
     else if (!mouseIsPressed && motion){
       time +=0.5
-    ballX = ballX+dx+xAcc*(time)
-    ballY = ballY-dy+yAcc*(time)
+    ballX = ballX+distanceStretchX+initialSpeed*0.04
+    ballY = ballY+distanceStretchY+initialSpeed*0.0025*(time)
     circle(ballX,ballY, bodyRadius)
       if (ballY > 500){
         // reset all motion related incrementing variables
         motion = false;
+        shotted = false;
         ballX = originX;
         ballY = originY;
         time = 0;
@@ -99,9 +116,10 @@ function draw() {
   var d = dist(175*0.5, 300, ballX, ballY) + bodyRadius;
   strokeWeight(8);
   stroke(120);
-  if ((ballX-bodyRadius/2) > 50 && (ballY) > 100){
+  if (((ballX-bodyRadius/2) > 50 && (ballY) > 100) || shotted){
     line(100*0.5, 300, 135*0.5, 300)
-  } else {
+    shotted = true;
+  } else if (!shotted){
     line(100*0.5,300, ballX-bodyRadius/2, ballY);
     }
   
