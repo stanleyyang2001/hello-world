@@ -1,33 +1,12 @@
-function setup() {
-  createCanvas(400, 400);
-  angleMode(DEGREES)
-}
-
-function draw() {
-  
-  // lines to the cursor
-  background(220);
-  translate(180,180)
-  stroke("black")
-  strokeWeight(5)
-  for (i = 0; i < 10; i++){
-    point(sin(i*36)*100, cos(i*36)*100)
-  }
-  for (i = 0; i < 10; i++){
-    //stroke(random(0,255), random(0,255), random(0,255)) // don't uncomment this if you have seizure
-    line(sin(i*36)*100, cos(i*36)*100, mouseX-180, mouseY-180)
-  }
-}
-/*
-
 var dx = 2;
 var dy = 2;
 var R;
 var G;
 var B;
-var angle = 0;
+
 function setup() {
   createCanvas(400, 400);
+  angleMode(DEGREES)
   x = width*0.4;
   y = height*0.4;
   R = 180;
@@ -36,7 +15,22 @@ function setup() {
 }
 
 function draw() {
-  background(R,G,B)
+  
+  // lines to the cursor
+  background(R,G,B);
+  stroke("black")
+  strokeWeight(5)
+  for (i = 0; i < 10; i++){
+    point(sin(i*36)*100+180, cos(i*36)*100+180)
+  }
+  for (i = 0; i < 10; i++){
+    //stroke(random(0,255), random(0,255), random(0,255)) // don't uncomment this if you have seizure
+    line(sin(i*36)*100+180, cos(i*36)*100+180, mouseX, mouseY)
+  }
+
+    
+    
+  // Skating star
   x+=dx;
   y+=dy;
   strokeWeight(5)
@@ -52,33 +46,28 @@ function draw() {
   line(x+60, y+50,x-40, y+120)
   // only points that touches: x+-40,y,y+120
   if (x +60 >= width ){
-    dx = -random(1,8);
+    dx = -random(1,6);
     R = random(0,255)
     G = random(0,255)
     B = random(0,255)
   } else if (x - 60 <= 0){
-    dx = random(1,8);
+    dx = random(1,6);
     R = random(0,255)
     G = random(0,255)
     B = random(0,255)
   }
   
   if (y+120 >= height){
-    dy = -random(1,8);
+    dy = -random(1,6);
     R = random(0,255)
     G = random(0,255)
     B = random(0,255)
   } else if (y <= 0){
-    dy = random(1,8);
+    dy = random(1,6);
     R = random(0,255)
     G = random(0,255)
     B = random(0,255)
   }
   
-  angle+=1
-  
 
 }
-
-
-*/
