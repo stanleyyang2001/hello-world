@@ -1,0 +1,21 @@
+var img1;
+var img2;
+var img3;
+var img4;
+var img5;
+const list = [img1, img2, img3, img4, img5];
+
+function setup() {
+  createCanvas(400, 400);
+  img1 = loadImage("img1.jpg")
+  img2 = loadImage("img1.jpg")
+  img3 = loadImage("img1.jpg")
+  img4 = loadImage("img1.jpg")
+  img5 = loadImage("img1.jpg")
+}
+
+function draw() {
+  background(220);
+  imageMode(CORNER)
+  image(img1,0,0)
+}
