@@ -1,0 +1,43 @@
+var img1;
+var img2;
+var img3;
+var img4;
+var img5;
+var list;
+var trans = 255
+var increment;
+var currImg;
+var ran;
+// all image file is included in the same directory as this file
+function setup() {
+  createCanvas(1200, 600);
+  img1 = loadImage("img1.jpg")  // turtle
+  img2 = loadImage("img2.jpg")  // dog
+  img3 = loadImage("img3.jpg")  // bird
+  img4 = loadImage("img4.jpg")  // wolf
+  img4.resize(40,0)
+  img5 = loadImage("img5.jpg")  // skeleton
+  img5.resize(40,0)
+  list = [img1, img2, img3, img4, img5]
+  currImg = list[int(random(0,5))]
+
+}
+
+function draw() {
+  background(220);
+  imageMode(CORNER)
+
+  currImg.resize(0,0)
+  image(currImg,0,0)
+
+  tint(255,trans)
+  
+  if (trans >= 255){
+    increments = -1.5
+  } else if (trans <= 0){
+    increments =  1.5
+    ran = int(random(0,5))
+    currImg = list[ran]
+  }
+  trans += increments
+}
