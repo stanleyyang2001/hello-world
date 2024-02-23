@@ -8,9 +8,9 @@ var trans = 255
 var increment;
 var currImg;
 var ran;
-// all image file is included in the same directory as this file
+
 function setup() {
-  createCanvas(1200, 600);
+  createCanvas(600, 500);
   img1 = loadImage("img1.jpg")  // turtle
   img2 = loadImage("img2.jpg")  // dog
   img3 = loadImage("img3.jpg")  // bird
@@ -28,14 +28,14 @@ function draw() {
   imageMode(CORNER)
 
   currImg.resize(0,0)
-  image(currImg,0,0)
+  image(currImg,0,0, 600,500)
 
   tint(255,trans)
   
   if (trans >= 255){
-    increments = -1.5
+    increments = -3
   } else if (trans <= 0){
-    increments =  1.5
+    increments =  3
     ran = int(random(0,5))
     currImg = list[ran]
   }
