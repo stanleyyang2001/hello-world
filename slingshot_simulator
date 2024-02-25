@@ -1,5 +1,8 @@
 // This is a static diagram that aims to demonstrate the motion of object in a trajectory with the use of a slingshot
 // reference: https://angrybirds.fandom.com/wiki/Slingshot
+
+// added feature for animation: allow user to enter 1 or 2 to change the ball to be circular ro a square respectively
+// added rotation to the ball, choose square as the ball for visual effect of rotation.
 var ballX = 65;
 var ballY = 300;
 var originX = ballX;
@@ -17,8 +20,10 @@ var initialSpeed;
 var shotted = false;
 var time = 0;
 
+var mode = 1;
 function setup() {
   createCanvas(1200, 400);
+  rectMode(CENTER)
 }
 
 function draw() {
@@ -27,12 +32,18 @@ function draw() {
   strokeWeight(0)
   textSize(20)
   text("Pressed the ball to stretch, release the mouse to shot",200,100,)
-  text("Pressed the mouse again to stop the ball",200,150,)
+  text("Pressed the mouse again to stop the ball",200,150)
+  text("Pressed 1 for circular ball, press 2 for square",200,200)
+  if (key == 1){
+    mode = 1;
+  } else {
+    mode = 2;
+  }
   
   // land
   fill("black");
   strokeWeight(0);
-  var ground = rect(-10,300,1300,200);
+  var ground = rect(600,400,1300,200);
   
 
   
@@ -52,11 +63,23 @@ function draw() {
     line(175*0.5,300, ballX-bodyRadius/2, ballY)
     }
   
-     // ball
-
+  // ball
   strokeWeight(1);
   fill("black");
-  var ball = circle(ballX,ballY,bodyRadius);
+  push()
+  translate(ballX, ballY)
+  if (!motion){
+    switch(mode){
+      case 1:
+        var ball = circle(0,0,bodyRadius);
+        break;
+      case 2:
+        var sqr = rect(0, 0, bodyRadius,bodyRadius);
+        break;         
+    }
+
+  }
+  pop()
   
   strokeWeight(2)
   
@@ -72,7 +95,14 @@ function draw() {
       if (mouseY < 370 && mouseY > 200){
         ballY = mouseY;
       }
-    circle(ballX, ballY, bodyRadius);
+          switch(mode){
+        case 1:
+        circle(ballX,ballY,bodyRadius);
+        break;
+      case 2:
+        rect(ballX, ballY, bodyRadius,bodyRadius);
+        break;         
+    }
     stretch = true;
     
   }else if (!mouseIsPressed && stretch){  // release
@@ -85,11 +115,22 @@ function draw() {
     
     initialSpeed = dist(mouseX, mouseY, originX, originY) 
   }
-    else if (!mouseIsPressed && motion){
+    else if (!mouseIsPressed && motion){  // moving
       time +=0.5
     ballX = ballX+distanceStretchX+initialSpeed*0.04
     ballY = ballY+distanceStretchY+initialSpeed*0.0025*(time)
-    circle(ballX,ballY, bodyRadius)
+    push()
+    translate(ballX, ballY)
+    rotate(time*0.2)
+    switch(mode){
+      case 1:
+        circle(0,0,bodyRadius);
+        break;
+      case 2:
+        rect(0, 0, bodyRadius,bodyRadius);
+        break;         
+    }
+    pop()
       if (ballY > 500){
         // reset all motion related incrementing variables
         motion = false;
@@ -97,12 +138,30 @@ function draw() {
         ballX = originX;
         ballY = originY;
         time = 0;
-        circle(ballX, ballY, bodyRadius)
+        //circle(ballX, ballY, bodyRadius)
+        push()
+        translate(ballX, ballY)
+        switch(mode){
+          case 1:
+            circle(0,0,bodyRadius);
+            break;
+          case 2:
+            rect(0, 0, bodyRadius,bodyRadius);
+            break;         
+    }
+        pop()
       }
   }
 
   else {
-    circle(ballX,ballY,bodyRadius);
+        switch(mode){
+          case 1:
+            circle(ballX,ballY,bodyRadius);
+            break;
+        case 2:
+            rect(ballX, ballY, bodyRadius,bodyRadius);
+            break;         
+    }
   }
 
   
