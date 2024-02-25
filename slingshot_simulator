@@ -3,6 +3,8 @@
 
 // added feature for animation: allow user to enter 1 or 2 to change the ball to be circular ro a square respectively
 // added rotation to the ball, choose square as the ball for visual effect of rotation.
+// added random color to apply to the ball each time it returns to the slingshot
+
 var ballX = 65;
 var ballY = 300;
 var originX = ballX;
@@ -21,10 +23,21 @@ var shotted = false;
 var time = 0;
 
 var mode = 1;
+
+var R = 0;
+var G = 0;
+var B = 0;
+
+
 function setup() {
   createCanvas(1200, 400);
   rectMode(CENTER)
+  R = int(random(0,256))
+  G = int(random(0,256))
+  B = int(random(0,256))
 }
+
+
 
 function draw() {
   background(155);
@@ -65,7 +78,7 @@ function draw() {
   
   // ball
   strokeWeight(1);
-  fill("black");
+  fill(R,G,B)
   push()
   translate(ballX, ballY)
   if (!motion){
@@ -132,13 +145,17 @@ function draw() {
     }
     pop()
       if (ballY > 500){
-        // reset all motion related incrementing variables
+        // reset all motion related incrementing variables and color
+        
         motion = false;
         shotted = false;
         ballX = originX;
         ballY = originY;
         time = 0;
-        //circle(ballX, ballY, bodyRadius)
+        R = int(random(0,256))
+        G = int(random(0,256))
+        B = int(random(0,256))
+        fill(R,G,B)
         push()
         translate(ballX, ballY)
         switch(mode){
@@ -181,8 +198,4 @@ function draw() {
   } else if (!shotted){
     line(100*0.5,300, ballX-bodyRadius/2, ballY);
     }
-  
-
-
-
 }
